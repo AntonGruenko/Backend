@@ -1,0 +1,26 @@
+server:
+  port 3036
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: root
+
+  mysql:
+    console:
+      enabled: true
+
+  liquibase:
+    enabled: true
+    changelog: classpath:db.changelog/db.changelog-master.xml
+
+  jpa:
+    generate-ddl: false
+
+    hibernate:
+      ddl-auto: none
+
+    showsql: true
+
+      

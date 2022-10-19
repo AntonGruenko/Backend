@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="2022-10-18--0008-Recipe_comment" author="AGruenko">
+        <preConditions>
+            <not>
+                <tableExists tableName="recipe_comments"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="recipe_comments">
+            <column name="id"
+                    type="NUMERIC(19, 0)"
+                    autoIncrement="true">
+
+                <constraints
+                    nullable="false"
+                    primaryKey="true"/>
+            </column>
+
+            <column name="author"
+                    type="NUMERIC(19, 0)">
+
+                <constraints
+                    nullable="false"
+                    foreignKeyName="fk_comment_author"
+                    references="users(id)"
+                    deleteCascade="true"/>
+            </column>
+
+            <column name="recipe"
+                    type="NUMERIC(19,0)">
+
+                <constraints
+                    nullable="true"
+                    foreignKeyName="fk_recipe"
+                    references="recipes(id)"
+                    deleteCascade="true"/>
+            </column>
+
+            <column name="text"
+                    type="VARCHAR(1000)">
+
+                <constraints
+                    nullable="false"/>
+            </column>
+
+            <column name="likes"
+                    type="NUMERIC(8, 0)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

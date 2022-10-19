@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="2022-10-01--0003-Recipe" author="AGruenko">
+        <preConditions>
+            <not>
+                <tableExists tableName="recipes"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="recipes">
+            <column name="id"
+                    type="NUMERIC(19, 0)"
+                    autoIncrement="true">
+
+                <constraints nullable="false"
+                             primaryKey="true"/>
+            </column>
+
+            <column name="name"
+                    type="VARCHAR(100)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="author"
+                    type="VARCHAR(100)">
+
+                <constraints
+                        nullable="false"
+                        foreignKeyName="fk_recipe_author"
+                        references="users(id)"
+                        deleteCascade="true"/>
+            </column>
+
+            <column name="ingredients"
+                    type="VARCHAR(10000)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="guide"
+                    type="VARCHAR(10000)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="reccomendations"
+                    type="VARCHAR(10000)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="time"
+                    type="NUMERIC(12, 0)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="kcal"
+                    type="NUMERIC(10, 0)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="proteins"
+                    type="NUMERIC(10, 0)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="fats"
+                    type="NUMERIC(10, 0)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="carbohydrates"
+                    type="NUMERIC(10, 0)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="sugar"
+                    type="NUMERIC(10, 0)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="likes"
+                    type="NUMERIC(8, 0)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+            
+            <column name="complexity"
+                    type="NUMERIC(3, 0)">
+
+                <constraints
+                        nullable="false"/>
+            </column>
+
+            <column name="tags"
+                    type="VARCHAR(100)">
+
+                <constraints
+                        nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
