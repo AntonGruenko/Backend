@@ -48,6 +48,9 @@ public class PictureServiceImpl implements PictureService{
         return pictureRepository.findAll();
     }
 
+    @Override
+    public List<Picture> getByRecipe(Recipe recipe){ return  pictureRepository.findByRecipe(recipe);}
+
     @Transactional
     @Override
     public void deleteById(int id) {

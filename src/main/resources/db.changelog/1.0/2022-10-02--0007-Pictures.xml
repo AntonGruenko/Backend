@@ -22,7 +22,7 @@
             </column>
 
             <column name="link"
-                    type="VARCHAR(100)">
+                    type="VARCHAR(250)">
 
                 <constraints
                         nullable="false"/>

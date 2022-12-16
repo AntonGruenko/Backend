@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public User update(int id, String name, String email, String password, String status, String profilePic) {
+    public User update(int id, String name, String email, String password, String status, String profilePic, int kcal, int proteins, int fats, int carbohydrates) {
         User user = User.builder()
                 .id(id)
                 .name(name)
@@ -32,6 +32,10 @@ public class UserServiceImpl implements UserService{
                 .password(password)
                 .status(status)
                 .profilePic(profilePic)
+                .kcal(kcal)
+                .proteins(proteins)
+                .fats(fats)
+                .carbohydrates(carbohydrates)
                 .build();
 
         return userRepository.save(user);

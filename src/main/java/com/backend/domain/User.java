@@ -27,6 +27,14 @@ public class User {
     private String status;
     @Column(name = "profile_pic")
     private String profilePic;
+    @Column(name = "kcal")
+    private int kcal;
+    @Column(name = "proteins")
+    private int proteins;
+    @Column(name = "fats")
+    private int fats;
+    @Column(name =  "carbohydrates")
+    private int carbohydrates;
 
 
 }

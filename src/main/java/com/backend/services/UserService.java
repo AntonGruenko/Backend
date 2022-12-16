@@ -8,7 +8,7 @@ public interface UserService {
 
     User insert(User user);
 
-    User update(int id, String name, String email, String password, String status, String profilePic);
+    User update(int id, String name, String email, String password, String status, String profilePic, int kcal, int proteins, int fats, int carbohydrates);
 
     User getById(int id);
 

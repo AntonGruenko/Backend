@@ -18,6 +18,10 @@ public class UserDto {
     private String password;
     private String status;
     private String profilePic;
+    private int kcal;
+    private int proteins;
+    private int fats;
+    private int carbohydrates;
 
     public static UserDto toDto(User user) {
 
@@ -26,7 +30,11 @@ public class UserDto {
                 user.getEmail(),
                 user.getPassword(),
                 user.getStatus(),
-                user.getProfilePic());
+                user.getProfilePic(),
+                user.getKcal(),
+                user.getProteins(),
+                user.getFats(),
+                user.getCarbohydrates());
     }
 
     public static User toDomainObject(UserDto userDto) {
@@ -36,6 +44,10 @@ public class UserDto {
                 userDto.getEmail(),
                 userDto.getPassword(),
                 userDto.getStatus(),
-                userDto.getProfilePic());
+                userDto.getProfilePic(),
+                userDto.getKcal(),
+                userDto.getProteins(),
+                userDto.getFats(),
+                userDto.getCarbohydrates());
     }
 }

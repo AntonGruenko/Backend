@@ -38,7 +38,7 @@
             </column>
 
             <column name="picture"
-                    type="VARCHAR(100)">
+                    type="VARCHAR(500)">
 
                 <constraints
                         nullable="true"/>

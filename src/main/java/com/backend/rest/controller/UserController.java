@@ -4,8 +4,10 @@ import com.backend.domain.User;
 import com.backend.rest.dto.UserDto;
 import com.backend.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +22,8 @@ public class UserController {
         return userService.getAll().stream().map(UserDto::toDto).collect(Collectors.toList());
     }
 
-    @PostMapping()
-    public UserDto insertUser(@RequestBody UserDto userDto){
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, "application/x-www-form-urlencoded"})
+    public UserDto insertUser( UserDto userDto){
         User user = userService.insert(UserDto.toDomainObject(userDto));
         return UserDto.toDto(user);
 
@@ -45,14 +47,18 @@ public class UserController {
         return UserDto.toDto(userService.getByEmail(email));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, "application/x-www-form-urlencoded"}, value = "/{id}")
     public UserDto updateUser(@PathVariable int id,
                               @RequestParam String name,
                               @RequestParam String email,
                               @RequestParam String password,
                               @RequestParam String status,
-                              @RequestParam String profilePic){
-        User user = userService.update(id, name, email, password, status, profilePic);
+                              @RequestParam String profilePic,
+                              @RequestParam int kcal,
+                              @RequestParam int proteins,
+                              @RequestParam int fats,
+                              @RequestParam int carbohydrates){
+        User user = userService.update(id, name, email, password, status, profilePic, kcal, proteins, fats, carbohydrates);
         return UserDto.toDto(user);
     }
 
