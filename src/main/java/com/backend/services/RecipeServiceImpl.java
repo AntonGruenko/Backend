@@ -34,7 +34,6 @@ public class RecipeServiceImpl implements RecipeService{
                 .fats(fats)
                 .carbohydrates(carbohydrates)
                 .sugar(sugar)
-                .likes(likes)
                 .complexity(complexity)
                 .tags(tags)
                 .build();
@@ -57,7 +56,6 @@ public class RecipeServiceImpl implements RecipeService{
                 .fats(fats)
                 .carbohydrates(carbohydrates)
                 .sugar(sugar)
-                .likes(likes)
                 .complexity(complexity)
                 .tags(tags)
                 .build();
@@ -137,18 +135,6 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public List<Recipe> findByTagsNot(String tags) {
         return recipeRepository.findByTagsNotContains(tags);
-    }
-
-    @Transactional
-    @Override
-    public int incrementLikes(int id) {
-        return recipeRepository.incrementRecipeLikesById(id);
-    }
-
-    @Transactional
-    @Override
-    public int decrementLikes(int id) {
-        return recipeRepository.decrementRecipeLikesById(id);
     }
 
     @Override

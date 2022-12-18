@@ -42,11 +42,6 @@ public interface RecipeService {
 
     List<Recipe> findByTagsNot(String tags);
 
-    int incrementLikes(int id);
-
-    @Transactional
-    int decrementLikes(int id);
-
     List<Recipe> getAll();
 
     void deleteById(int id);

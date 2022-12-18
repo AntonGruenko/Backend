@@ -37,4 +37,15 @@ public class User {
     private int carbohydrates;
 
 
+    public User(String name, String email, String password, String status, String profilePic, int kcal, int proteins, int fats, int carbohydrates) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.status = status;
+        this.profilePic = profilePic;
+        this.kcal = kcal;
+        this.proteins = proteins;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
+    }
 }

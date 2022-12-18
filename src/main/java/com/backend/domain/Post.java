@@ -24,7 +24,5 @@ public class Post {
     private String text;
     @Column(name = "picture")
     private String picture;
-    @Column(name = "likes")
-    private int likes;
 
 }

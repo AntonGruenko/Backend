@@ -25,7 +25,6 @@ public class PostServiceImpl implements PostService{
                 .author(author)
                 .text(text)
                 .picture(picture)
-                .likes(likes)
                 .build();
         return postRepository.save(post);
     }
@@ -38,7 +37,6 @@ public class PostServiceImpl implements PostService{
                 .author(userRepository.findById(authorId))
                 .text(text)
                 .picture(picture)
-                .likes(likes)
                 .build();
 
         return postRepository.save(post);
@@ -57,18 +55,6 @@ public class PostServiceImpl implements PostService{
     @Override
     public List<Post> findByText(String text) {
         return postRepository.findByTextContains(text);
-    }
-
-    @Override
-    @Transactional
-    public int incrementLikesById(int id) {
-        return postRepository.incrementPostLikesById(id);
-    }
-
-    @Override
-    @Transactional
-    public int decrementLikesById(int id) {
-        return postRepository.decrementPostLikesById(id);
     }
 
     @Override

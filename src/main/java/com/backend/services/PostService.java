@@ -18,10 +18,6 @@ public interface PostService {
 
     List<Post> findByText(String text);
 
-    int incrementLikesById(int id);
-
-    int decrementLikesById(int id);
-
     List<Post> getAll();
 
     void deleteById(int id);

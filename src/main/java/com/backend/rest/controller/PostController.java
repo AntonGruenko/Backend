@@ -62,16 +62,6 @@ public class PostController {
         return postService.findByText(text).stream().map(PostDto::toDto).collect(Collectors.toList());
     }
 
-    @PostMapping("/increment/{id}")
-    void incrementLikesById(@PathVariable int id){
-        postService.incrementLikesById(id);
-    }
-
-    @PostMapping("/decrement/{id}")
-    void decrementLikesById(@PathVariable int id){
-        postService.decrementLikesById(id);
-    }
-
     @DeleteMapping("/{id}")
     void deleteById(@PathVariable int id){
         postService.deleteById(id);

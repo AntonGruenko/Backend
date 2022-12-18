@@ -16,15 +16,13 @@ public class PostDto {
     private UserDto authorDto;
     private String text;
     private String picture;
-    private int likes;
 
     public static PostDto toDto(Post post){
         return new PostDto(
                 post.getId(),
                 UserDto.toDto(post.getAuthor()),
                 post.getText(),
-                post.getPicture(),
-                post.getLikes()
+                post.getPicture()
         );
     }
 
@@ -33,8 +31,7 @@ public class PostDto {
                 postDto.getId(),
                 user,
                 postDto.getText(),
-                postDto.getPicture(),
-                postDto.getLikes()
+                postDto.getPicture()
         );
     }
 }

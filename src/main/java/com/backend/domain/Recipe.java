@@ -42,8 +42,6 @@ public class Recipe {
     private int carbohydrates;
     @Column(name = "sugar")
     private int sugar;
-    @Column(name = "likes")
-    private int likes;
     @Column(name = "complexity")
     private int complexity;
     @Column(name = "tags")

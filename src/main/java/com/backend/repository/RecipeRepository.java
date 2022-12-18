@@ -58,13 +58,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
                                                                         @Param("carbohydrates") int carbohydrates,
                                                                         @Param("sugar") int sugar);
 
-    @Modifying
-    @Query("update Recipe r set r.likes = r.likes + 1 where r.id = :id")
-    int incrementRecipeLikesById(@Param("id") int id);
-
-    @Modifying
-    @Query("update Recipe r set r.likes = r.likes - 1 where r.id = :id")
-    int decrementRecipeLikesById(@Param("id") int id);
-
 
 }

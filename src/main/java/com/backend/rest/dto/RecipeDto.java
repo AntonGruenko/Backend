@@ -24,7 +24,6 @@ public class RecipeDto {
     private int fats;
     private int carbohydrates;
     private int sugar;
-    private int likes;
     private int complexity;
     private String tags;
 
@@ -42,7 +41,6 @@ public class RecipeDto {
                 recipe.getFats(),
                 recipe.getCarbohydrates(),
                 recipe.getSugar(),
-                recipe.getLikes(),
                 recipe.getComplexity(),
                 recipe.getTags()
         );
@@ -62,7 +60,6 @@ public class RecipeDto {
                 recipeDto.getFats(),
                 recipeDto.getCarbohydrates(),
                 recipeDto.getSugar(),
-                recipeDto.getLikes(),
                 recipeDto.getComplexity(),
                 recipeDto.getTags()
         );

@@ -18,14 +18,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     void deleteById(int id);
 
-    @Modifying
-    @Query("update Post p set p.likes = p.likes + 1 where p.id = :id")
-    int incrementPostLikesById(@Param("id") int id);
-
-    @Modifying
-    @Query("update Post p set p.likes = p.likes - 1 where p.id = :id")
-    int decrementPostLikesById(@Param("id") int id);
-
     @EntityGraph(attributePaths = "author")
     List<Post> findByAuthor(User author);
 

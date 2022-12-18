@@ -200,16 +200,6 @@ public class RecipeController {
         return recipeList.stream().map(RecipeDto::toDto).collect(Collectors.toList());
     }
 
-    @PostMapping("/increment/{id}")
-    void incrementLikesById(@PathVariable int id){
-        recipeService.incrementLikes(id);
-    }
-
-    @PostMapping("/decrement/{id}")
-    void decrementLikesById(@PathVariable int id){
-        recipeService.decrementLikes(id);
-    }
-
     @DeleteMapping("/{id}")
     void deleteById(@PathVariable int id){
         recipeService.deleteById(id);
