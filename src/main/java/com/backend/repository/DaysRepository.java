@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface DaysRepository extends JpaRepository<Days, Integer> {
 
-    @EntityGraph(attributePaths = "days")
+    @EntityGraph(attributePaths = "user")
     @Override
     List<Days> findAll();
 
