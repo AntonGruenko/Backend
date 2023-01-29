@@ -64,6 +64,12 @@ public class DaysController {
         return daysService.getByUser(user).stream().map(DaysDto::toDto).collect(Collectors.toList());
     }
 
+    @GetMapping("user/{userId}/day/{day}")
+    DaysDto getDayByUserAndDay(@PathVariable int userId,
+                               @PathVariable int day){
+        return DaysDto.toDto(daysService.getByUserAndDay(userId, day));
+    }
+
     @DeleteMapping("/{id}")
     void deleteById(@PathVariable int id){
         daysService.deleteById(id);

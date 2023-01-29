@@ -19,7 +19,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     @Transactional
-    public Post insert(int authorId, String text, String picture, int likes) {
+    public Post insert(int authorId, String text, String picture) {
         User author = (User) userRepository.findById(authorId);
         Post post = Post.builder()
                 .author(author)
@@ -31,7 +31,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     @Transactional
-    public Post update(int id, int authorId, String text, String picture, int likes) {
+    public Post update(int id, int authorId, String text, String picture) {
         Post post = Post.builder()
                 .id(id)
                 .author(userRepository.findById(authorId))

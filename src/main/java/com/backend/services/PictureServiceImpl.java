@@ -49,7 +49,17 @@ public class PictureServiceImpl implements PictureService{
     }
 
     @Override
-    public List<Picture> getByRecipe(Recipe recipe){ return  pictureRepository.findByRecipe(recipe);}
+    public List<Picture> getByRecipe(Recipe recipe){ return  pictureRepository.findByRecipeOrderByNumberAsc(recipe);}
+
+    @Override
+    public List<Picture> getPreviews() {
+        return pictureRepository.findPreviews();
+    }
+
+    @Override
+    public List<Picture> getPreviewsByUserId(int userId) {
+        return pictureRepository.findPreviewsByAuthor(userId);
+    }
 
     @Transactional
     @Override

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Transactional
     @Override
-    public Recipe insert(String name, int authorId, String ingredients, String guide, String reccomendations, int time, int kcal, int proteins, int fats, int carbohydrates, int sugar, int likes, int complexity, String tags) {
+    public Recipe insert(String name, int authorId, String ingredients, String guide, String reccomendations, int time, int kcal, int proteins, int fats, int carbohydrates, int sugar, int complexity, String tags) {
         User author = userRepository.findById(authorId);
         Recipe recipe = Recipe.builder().
                 name(name)
@@ -42,7 +43,7 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Transactional
     @Override
-    public Recipe update(int id, String name, int authorId, String ingredients, String guide, String reccomendations, int time, int kcal, int proteins, int fats, int carbohydrates, int sugar, int likes, int complexity, String tags) {
+    public Recipe update(int id, String name, int authorId, String ingredients, String guide, String reccomendations, int time, int kcal, int proteins, int fats, int carbohydrates, int sugar, int complexity, String tags) {
         Recipe recipe = Recipe.builder()
                 .id(id)
                 .name(name)
@@ -69,7 +70,7 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     public List<Recipe> findByName(String name) {
-        return recipeRepository.findByName(name);
+        return recipeRepository.findByNameContains(name);
     }
 
     @Override
@@ -118,23 +119,71 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public List<Recipe> findByIngredients(String ingredients) {
-        return recipeRepository.findByIngredientsContains(ingredients);
+    public List<Recipe> findByIngredients(String[] ingredients) {
+        List<Recipe> recipes = new ArrayList<>();
+        for(int i = 0; i < ingredients.length; ++i){
+            recipes.addAll(recipeRepository.findByIngredientsContains(ingredients[i]));
+        }
+
+        for (int i = 0; i < recipes.size(); i++) {
+            for(int j = i + 1; j < recipes.size(); ++j){
+                if(recipes.get(i).getId() == recipes.get(j).getId()){
+                    recipes.remove(j);
+                }
+            }
+        }
+        return recipes;
     }
 
     @Override
-    public List<Recipe> findByIngredientsNot(String ingredients) {
-        return recipeRepository.findByIngredientsNotContains(ingredients);
+    public List<Recipe> findByIngredientsNot(String[] ingredients) {
+        List<Recipe> recipes = new ArrayList<>();
+        for(int i = 0; i < ingredients.length; ++i){
+            recipes.addAll(recipeRepository.findByIngredientsNotContains(ingredients[i]));
+        }
+
+        for (int i = 0; i < recipes.size(); i++) {
+            for(int j = i + 1; j < recipes.size(); ++j){
+                if(recipes.get(i).getId() == recipes.get(j).getId()){
+                    recipes.remove(j);
+                }
+            }
+        }
+        return recipes;
     }
 
     @Override
-    public List<Recipe> findByTags(String tags) {
-        return recipeRepository.findByTagsContains(tags);
+    public List<Recipe> findByTags(String[] tags) {
+        List<Recipe> recipes = new ArrayList<>();
+        for(int i = 0; i < tags.length; ++i){
+            recipes.addAll(recipeRepository.findByTagsContains(tags[i]));
+        }
+
+        for (int i = 0; i < recipes.size(); i++) {
+            for(int j = i + 1; j < recipes.size(); ++j){
+                if(recipes.get(i).getId() == recipes.get(j).getId()){
+                    recipes.remove(j);
+                }
+            }
+        }
+        return recipes;
     }
 
     @Override
-    public List<Recipe> findByTagsNot(String tags) {
-        return recipeRepository.findByTagsNotContains(tags);
+    public List<Recipe> findByTagsNot(String[] tags) {
+        List<Recipe> recipes = new ArrayList<>();
+        for(int i = 0; i < tags.length; ++i){
+            recipes.addAll(recipeRepository.findByTagsNotContains(tags[i]));
+        }
+
+        for (int i = 0; i < recipes.size(); i++) {
+            for(int j = i + 1; j < recipes.size(); ++j){
+                if(recipes.get(i).getId() == recipes.get(j).getId()){
+                    recipes.remove(j);
+                }
+            }
+        }
+        return recipes;
     }
 
     @Override
@@ -146,5 +195,10 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public void deleteById(int id) {
         recipeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Recipe> findByAuthors(List<User> users) {
+        return recipeRepository.findByAuthors(users);
     }
 }

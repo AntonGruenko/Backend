@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface RecipeService {
 
-    Recipe insert(String name, int authorId, String ingredients, String guide, String reccomendations, int time, int kcal, int proteins, int fats, int carbohydrates, int sugar, int likes, int complexity, String tags);
+    Recipe insert(String name, int authorId, String ingredients, String guide, String reccomendations, int time, int kcal, int proteins, int fats, int carbohydrates, int likes, int complexity, String tags);
 
-    Recipe update(int id, String name, int authorId, String ingredients, String guide, String reccomendations, int time, int kcal, int proteins, int fats, int carbohydrates, int sugar, int likes, int complexity, String tags);
+    Recipe update(int id, String name, int authorId, String ingredients, String guide, String reccomendations, int time, int kcal, int proteins, int fats, int carbohydrates, int sugar, int complexity, String tags);
 
     Recipe getById(int id);
 
@@ -34,15 +34,17 @@ public interface RecipeService {
 
     List<Recipe> getByTimeBetween(int time1, int time2);
 
-    List<Recipe> findByIngredients(String ingredients);
+    List<Recipe> findByIngredients(String[] ingredients);
 
-    List<Recipe> findByIngredientsNot(String ingredients);
+    List<Recipe> findByIngredientsNot(String[] ingredients);
 
-    List<Recipe> findByTags(String tags);
+    List<Recipe> findByTags(String[] tags);
 
-    List<Recipe> findByTagsNot(String tags);
+    List<Recipe> findByTagsNot(String[] tags);
 
     List<Recipe> getAll();
 
     void deleteById(int id);
+
+    List<Recipe> findByAuthors(List<User> users);
 }

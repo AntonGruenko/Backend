@@ -51,6 +51,16 @@ public class PictureController {
         return PictureDto.toDto(picture);
     }
 
+    @GetMapping("/previews")
+    List<PictureDto> getPreviews(){
+        return pictureService.getPreviews().stream().map(PictureDto::toDto).collect(Collectors.toList());
+    }
+
+    @GetMapping("previews/{id}")
+    List<PictureDto> getPreviewsByUser(@PathVariable int id){
+        return pictureService.getPreviewsByUserId(id).stream().map(PictureDto::toDto).collect(Collectors.toList());
+    }
+
     @DeleteMapping("/{id}")
     void deletePictureById(@PathVariable int id){
         pictureService.deleteById(id);

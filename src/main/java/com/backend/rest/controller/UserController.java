@@ -57,8 +57,9 @@ public class UserController {
                               @RequestParam int kcal,
                               @RequestParam int proteins,
                               @RequestParam int fats,
-                              @RequestParam int carbohydrates){
-        User user = userService.update(id, name, email, password, status, profilePic, kcal, proteins, fats, carbohydrates);
+                              @RequestParam int carbohydrates,
+                              @RequestParam long registrationDate){
+        User user = userService.update(id, name, email, password, status, profilePic, kcal, proteins, fats, carbohydrates,registrationDate);
         return UserDto.toDto(user);
     }
 

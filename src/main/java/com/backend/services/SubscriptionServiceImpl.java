@@ -58,7 +58,13 @@ public class SubscriptionServiceImpl implements SubscriptionService{
 
     @Override
     @Transactional
-    public void deleteById(int id) {
-        subscriptionRepository.deleteById(id);
+    public void deleteById(int leaderId, int followerId) {
+        User leader = userService.getById(leaderId);
+        List<Subscription> subscriptions = subscriptionRepository.findByLeader(leader);
+        for (Subscription subscription: subscriptions){
+            if(subscription.getFollower().getId() == followerId){
+                subscriptionRepository.deleteById(subscription.getId());
+            }
+        }
     }
 }

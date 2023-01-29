@@ -20,6 +20,10 @@ public class Meal {
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user")
     private User user;
-    @Column(name = "recipe")
+    @ManyToOne(targetEntity = Recipe.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipe")
     private Recipe recipe;
+    @ManyToOne(targetEntity = Days.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "day")
+    private Days day;
 }

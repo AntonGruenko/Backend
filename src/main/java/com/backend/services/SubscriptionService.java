@@ -20,5 +20,5 @@ public interface SubscriptionService {
 
     List<Subscription> getAll();
 
-    void deleteById(int id);
+    void deleteById(int leaderId, int followerId);
 }

@@ -22,6 +22,7 @@ public class UserDto {
     private int proteins;
     private int fats;
     private int carbohydrates;
+    private long registrationDate;
 
     public static UserDto toDto(User user) {
 
@@ -34,7 +35,8 @@ public class UserDto {
                 user.getKcal(),
                 user.getProteins(),
                 user.getFats(),
-                user.getCarbohydrates());
+                user.getCarbohydrates(),
+                user.getRegistrationDate());
     }
 
     public static User toDomainObject(UserDto userDto) {
@@ -48,6 +50,7 @@ public class UserDto {
                 userDto.getKcal(),
                 userDto.getProteins(),
                 userDto.getFats(),
-                userDto.getCarbohydrates());
+                userDto.getCarbohydrates(),
+                userDto.getRegistrationDate());
     }
 }

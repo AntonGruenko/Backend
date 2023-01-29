@@ -28,9 +28,8 @@ public class PostController {
     PostDto insertPost(
             @RequestParam int authorId,
             @RequestParam String text,
-            @RequestParam String picture,
-            @RequestParam int likes){
-        Post post = postService.insert(authorId, text, picture, likes);
+            @RequestParam String picture){
+        Post post = postService.insert(authorId, text, picture);
         return PostDto.toDto(post);
     }
 
@@ -38,9 +37,8 @@ public class PostController {
     PostDto updatePost(@PathVariable int id,
                        @RequestParam int authorId,
                        @RequestParam String text,
-                       @RequestParam String picture,
-                       @RequestParam int likes){
-        Post post = postService.update(id, authorId, text, picture, likes);
+                       @RequestParam String picture){
+        Post post = postService.update(id, authorId, text, picture);
         return PostDto.toDto(post);
     }
 

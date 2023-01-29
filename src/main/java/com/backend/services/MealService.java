@@ -7,7 +7,7 @@ import com.backend.domain.User;
 import java.util.List;
 
 public interface MealService {
-    Meal insert(int userId, int recipeId);
+    Meal insert(int userId, int recipeId, int dayId);
 
     Meal update(int id, int userId, int recipeId);
 
@@ -16,6 +16,8 @@ public interface MealService {
     List<Meal> getByUser(User user);
 
     List<Meal> getAll();
+
+    List<Meal> getByUserAndDay(User user, Days days);
 
     void deleteById(int id);
 }

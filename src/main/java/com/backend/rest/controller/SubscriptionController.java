@@ -1,5 +1,7 @@
 package com.backend.rest.controller;
 
+import com.backend.domain.Recipe;
+import com.backend.domain.RecipeLike;
 import com.backend.domain.Subscription;
 import com.backend.domain.User;
 import com.backend.rest.dto.SubscriptionDto;
@@ -42,9 +44,25 @@ public class SubscriptionController {
     }
 
     @GetMapping("/leader/{leaderId}")
-    List<SubscriptionDto> getByLeader(@PathVariable  int leaderId){
+    int getByLeader(@PathVariable  int leaderId){
         User leader = userService.getById(leaderId);
-        return subscriptionService.findByLeader(leader).stream().map(SubscriptionDto::toDto).collect(Collectors.toList());
+        return subscriptionService.findByLeader(leader).size();
+    }
+
+    @GetMapping("/check/{leaderId}/{followerId}")
+    boolean checkSubscription(@PathVariable int leaderId,
+                              @PathVariable int followerId){
+        User leader = userService.getById(leaderId);
+        User follower = userService.getById(followerId);
+        List<Subscription> subscriptions = subscriptionService.findByLeader(leader);
+        for(Subscription subscription : subscriptions) {
+            if (subscription.getFollower().getId() == follower.getId()) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
     @GetMapping("/follower/{followerId}")
@@ -53,8 +71,9 @@ public class SubscriptionController {
         return subscriptionService.findByFollower(follower).stream().map(SubscriptionDto::toDto).collect(Collectors.toList());
     }
 
-    @DeleteMapping("/{id}")
-    void deleteById(@PathVariable int id){
-        subscriptionService.deleteById(id);
+    @DeleteMapping("/{leaderId}/{followerId}")
+    void deleteById(@PathVariable int leaderId,
+                    @PathVariable int followerId){
+        subscriptionService.deleteById(leaderId, followerId);
     }
 }

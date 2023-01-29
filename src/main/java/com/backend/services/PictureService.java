@@ -18,5 +18,9 @@ public interface PictureService {
 
     List<Picture> getByRecipe(Recipe recipe);
 
+    List<Picture> getPreviews();
+
+    List<Picture> getPreviewsByUserId(int userId);
+
     void deleteById(int id);
 }

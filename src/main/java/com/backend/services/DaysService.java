@@ -17,5 +17,7 @@ public interface DaysService {
 
     List<Days> getAll();
 
+    Days getByUserAndDay(int userId, int day);
+
     void deleteById(int id);
 }

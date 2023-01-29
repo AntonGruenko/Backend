@@ -17,14 +17,20 @@ public interface PictureRepository extends JpaRepository<Picture, Integer> {
     List<Picture> findAll();
 
     @EntityGraph(attributePaths = "recipe")
-    List<Picture> findByRecipe(Recipe recipe);
+    List<Picture> findByRecipeOrderByNumberAsc(Recipe recipe);
 
     void deleteById(int id);
 
     @Modifying
     @Query("update Picture p set p.link = :link where p.id = :id")
-    void updateLinkById(@Param("id") int id,
+    void updateLinkById(@Param("id") int id, 
                         @Param("link") String link);
+
+    @Query("select p from Picture p where p.number =0")
+    List<Picture> findPreviews();
+
+    @Query("select p from Picture p where p.number =0 and p.recipe.author.id = :id")
+    List<Picture> findPreviewsByAuthor(@Param("id") int id);
 
 
 }

@@ -17,20 +17,23 @@ public class MealDto {
     private int id;
     private UserDto user;
     private RecipeDto recipe;
+    private DaysDto days;
 
     public static MealDto toDto(Meal meal) {
         return new MealDto(
                 meal.getId(),
                 UserDto.toDto(meal.getUser()),
-                RecipeDto.toDto(meal.getRecipe())
+                RecipeDto.toDto(meal.getRecipe()),
+                DaysDto.toDto(meal.getDay())
         );
     }
 
-    public static Meal toDomainObject(MealDto mealDto, User user, Recipe recipe) {
+    public static Meal toDomainObject(MealDto mealDto, User user, Recipe recipe, Days days) {
         return new Meal(
                 mealDto.getId(),
                 user,
-                recipe
+                recipe,
+                days
         );
     }
 }

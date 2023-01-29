@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface PostService {
 
-    Post insert(int authorId, String text, String picture, int likes);
+    Post insert(int authorId, String text, String picture);
 
-    Post update(int id, int authorId, String text, String picture, int likes);
+    Post update(int id, int authorId, String text, String picture);
 
     Post getById(int id);
 

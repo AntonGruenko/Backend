@@ -11,6 +11,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +41,6 @@ public class RecipeController {
             @RequestParam int fats,
             @RequestParam int carbohydrates,
             @RequestParam int sugar,
-            @RequestParam int likes,
             @RequestParam int complexity,
             @RequestParam String tags) {
         Recipe recipe = recipeService.insert(
@@ -54,7 +55,6 @@ public class RecipeController {
                 fats,
                 carbohydrates,
                 sugar,
-                likes,
                 complexity,
                 tags);
 
@@ -75,7 +75,6 @@ public class RecipeController {
             @RequestParam int fats,
             @RequestParam int carbohydrates,
             @RequestParam int sugar,
-            @RequestParam int likes,
             @RequestParam int complexity,
             @RequestParam String tags) {
         Recipe recipe = recipeService.update(
@@ -91,7 +90,6 @@ public class RecipeController {
                 fats,
                 carbohydrates,
                 sugar,
-                likes,
                 complexity,
                 tags);
 
@@ -177,35 +175,42 @@ public class RecipeController {
     }
 
     @GetMapping("/ingredients/{ingredients}")
-    List<RecipeDto> getByIngredients(@PathVariable String ingredients){
+    List<RecipeDto> getByIngredients(@PathVariable String[] ingredients){
         List<Recipe> recipeList = recipeService.findByIngredients(ingredients);
         return recipeList.stream().map(RecipeDto::toDto).collect(Collectors.toList());
     }
 
     @GetMapping("/ingredients/not/{ingredients}")
-    List<RecipeDto> getByIngredientsNot(@PathVariable String ingredients){
+    List<RecipeDto> getByIngredientsNot(@PathVariable String[] ingredients){
         List<Recipe> recipeList = recipeService.findByIngredientsNot(ingredients);
         return recipeList.stream().map(RecipeDto::toDto).collect(Collectors.toList());
     }
 
     @GetMapping("/tags/{tags}")
-    List<RecipeDto> getByTags(@PathVariable String tags){
+    List<RecipeDto> getByTags(@PathVariable String[] tags){
         List<Recipe> recipeList = recipeService.findByTags(tags);
         return recipeList.stream().map(RecipeDto::toDto).collect(Collectors.toList());
     }
 
     @GetMapping("/tags/not/{tags}")
-    List<RecipeDto> getByTagsNot(@PathVariable String tags){
+    List<RecipeDto> getByTagsNot(@PathVariable String[] tags){
         List<Recipe> recipeList = recipeService.findByTagsNot(tags);
         return recipeList.stream().map(RecipeDto::toDto).collect(Collectors.toList());
+    }
+
+    @GetMapping("/authors/{authors}")
+    List<RecipeDto> getByAuthors(@PathVariable String[] authors){
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < authors.length; ++i){
+            User user = userService.getById(Integer.parseInt(authors[i]));
+            users.add(user);
+        }
+        return recipeService.findByAuthors(users).stream().map(RecipeDto::toDto).collect(Collectors.toList());
     }
 
     @DeleteMapping("/{id}")
     void deleteById(@PathVariable int id){
         recipeService.deleteById(id);
     }
-
-
-
 
 }

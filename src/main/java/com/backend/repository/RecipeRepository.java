@@ -21,7 +21,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @EntityGraph(attributePaths = "author")
     List<Recipe> findByAuthor(User author);
 
-    List<Recipe> findByName(String name);
+    List<Recipe> findByNameContains(String name);
 
     List<Recipe> findByComplexity(int complexity);
 
@@ -45,7 +45,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
     List<Recipe> findByIngredientsNotContains(String ingredients);
 
-    List<Recipe> findByTagsNotContains(String tags);
+    List<Recipe> findByTagsNotContains(String tag);
 
     void deleteById(int id);
 
@@ -57,6 +57,9 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
                                                                         @Param("fats") int fats,
                                                                         @Param("carbohydrates") int carbohydrates,
                                                                         @Param("sugar") int sugar);
+
+    @Query(value = "select * from recipes where author in :users", nativeQuery = true)
+    List<Recipe> findByAuthors(@Param("users") List<User> users);
 
 
 }

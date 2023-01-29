@@ -36,8 +36,11 @@ public class User {
     @Column(name =  "carbohydrates")
     private int carbohydrates;
 
+    @Column(name = "registration_date")
+    private long registrationDate;
 
-    public User(String name, String email, String password, String status, String profilePic, int kcal, int proteins, int fats, int carbohydrates) {
+
+    public User(String name, String email, String password, String status, String profilePic, int kcal, int proteins, int fats, int carbohydrates, long registrationDate) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -47,5 +50,6 @@ public class User {
         this.proteins = proteins;
         this.fats = fats;
         this.carbohydrates = carbohydrates;
+        this.registrationDate = registrationDate;
     }
 }
